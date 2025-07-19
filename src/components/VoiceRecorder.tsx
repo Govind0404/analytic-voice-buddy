@@ -126,7 +126,7 @@ export const VoiceRecorder: FC<VoiceRecorderProps> = ({ onTranscriptionComplete,
       disabled={disabled || isTranscribing}
       variant={isRecording ? "destructive" : "outline"}
       size="sm"
-      className={isRecording ? "animate-pulse" : ""}
+      className={isRecording ? "animate-pulse-soft" : ""}
     >
       {isRecording ? (
         <Square className="h-4 w-4" />

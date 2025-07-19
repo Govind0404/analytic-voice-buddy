@@ -8,49 +8,49 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 248 250 252;
-    --foreground: 218 229 239;
+    --background: 0 0% 100%;
+    --foreground: 222 84% 5%;
 
-    --card: 255 255 255;
-    --card-foreground: 31 35 40;
+    --card: 0 0% 100%;
+    --card-foreground: 222 84% 5%;
 
-    --popover: 255 255 255;
-    --popover-foreground: 31 35 40;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 84% 5%;
 
-    --primary: 212 87% 49%;
-    --primary-foreground: 255 255 255;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 243 246 250;
-    --secondary-foreground: 51 65 85;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 84% 5%;
 
-    --muted: 243 246 250;
-    --muted-foreground: 107 114 126;
+    --muted: 210 40% 98%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 59 130 246;
-    --accent-foreground: 255 255 255;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 239 68 68;
-    --destructive-foreground: 255 255 255;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 229 234 241;
-    --input: 249 250 251;
-    --ring: 212 87% 49%;
+    --border: 214 32% 91%;
+    --input: 0 0% 100%;
+    --ring: 217 91% 60%;
 
     /* Custom analytics colors */
-    --chart-primary: 59 130 246;
-    --chart-secondary: 16 185 129;
-    --chart-tertiary: 245 158 11;
-    --chart-quaternary: 239 68 68;
+    --chart-primary: 217 91% 60%;
+    --chart-secondary: 142 76% 36%;
+    --chart-tertiary: 32 95% 44%;
+    --chart-quaternary: 0 84% 60%;
     
     /* Chat specific colors */
-    --chat-user: 212 87% 49%;
-    --chat-user-foreground: 255 255 255;
-    --chat-assistant: 255 255 255;
-    --chat-assistant-foreground: 31 35 40;
+    --chat-user: 217 91% 60%;
+    --chat-user-foreground: 0 0% 100%;
+    --chat-assistant: 0 0% 100%;
+    --chat-assistant-foreground: 222 84% 5%;
     
     /* Gradient effects */
-    --gradient-primary: linear-gradient(135deg, hsl(212 87% 49%), hsl(212 87% 59%));
-    --gradient-background: linear-gradient(135deg, hsl(248 250 252), hsl(243 246 250));
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 70%));
+    --gradient-background: linear-gradient(135deg, hsl(210 40% 98%), hsl(210 40% 96%));
 
     --radius: 0.5rem;
 
