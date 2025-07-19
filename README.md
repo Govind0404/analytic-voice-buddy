@@ -1,73 +1,129 @@
-# Welcome to your Lovable project
+# SalesChatGPT - Conversational Sales Analytics Dashboard
 
-## Project info
+A modern, responsive web application that enables natural language interaction with sales data through text, voice, and file uploads. Built with React, TypeScript, and Tailwind CSS.
 
-**URL**: https://lovable.dev/projects/50f96f73-b937-4404-a845-653eb6212ecc
+## 🚀 Features
 
-## How can I edit this code?
+### Core Functionality
+- **Natural Language Queries**: Ask questions about sales data in plain English
+- **Voice Input**: Real-time speech-to-text transcription for hands-free interaction
+- **CSV File Upload**: Drag-and-drop or click to upload sales data files
+- **Interactive Analytics**: Display results as charts, tables, and key metrics
+- **Conversation History**: Sidebar with past queries and responses
+- **Dark/Light Theme**: Toggle between themes with system preference support
 
-There are several ways of editing your application.
+### UI Components
+- **Three-Panel Layout**: Sidebar, main chat, and metrics panel
+- **Responsive Design**: Mobile-first design that works on all devices
+- **Modern Chat Interface**: Clean, ChatGPT-style conversation bubbles
+- **Real-time Metrics**: Live dashboard with key sales indicators
+- **Smooth Animations**: Polished transitions and micro-interactions
 
-**Use Lovable**
+## 🛠️ Technical Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/50f96f73-b937-4404-a845-653eb6212ecc) and start prompting.
+- **Frontend**: React 18 + TypeScript
+- **Styling**: Tailwind CSS + shadcn/ui components
+- **Charts**: Recharts for data visualization
+- **Voice**: Web Speech API for speech recognition
+- **File Processing**: PapaParse for CSV handling
+- **Theme**: next-themes for dark/light mode
+- **Build Tool**: Vite
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🚀 Getting Started
 
-**Use your preferred IDE**
+### Prerequisites
+- Node.js 16+ or Bun
+- Modern web browser with Speech API support
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1. **Clone the repository**
+   ```bash
+   git clone <YOUR_GIT_URL>
+   cd saleschatgpt
+   ```
 
-Follow these steps:
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   bun install
+   ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3. **Start development server**
+   ```bash
+   npm run dev
+   # or
+   bun dev
+   ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4. **Open in browser**
+   Navigate to `http://localhost:5173`
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 💬 Usage Examples
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+### Text Queries
+- "What were total sales in Q1 2024?"
+- "Show me sales by region"
+- "Who are our top customers?"
+- "What's the average deal size?"
+- "Show me the sales pipeline"
+
+### Voice Input
+1. Click the microphone button
+2. Speak your question clearly
+3. Wait for transcription
+4. Click send or say "send"
+
+### File Upload
+1. Click the upload button or drag a CSV file
+2. System automatically processes the data
+3. Ask questions about the uploaded data
+4. View results in charts and tables
+
+## 📊 Key Components
+
+- **ChatInterface**: Main conversational UI with voice/file support
+- **QueryProcessor**: Handles natural language queries and generates responses
+- **AnalyticsChart/Table**: Beautiful data visualizations using Recharts
+- **VoiceRecorder**: Real-time speech recognition
+- **FileUploader**: CSV processing with PapaParse
+- **Layout**: Three-panel responsive layout with sidebar and metrics
+- **ThemeProvider**: Dark/light mode support
+
+## 🎨 Architecture
+
+The application follows a modular component architecture:
+
+```
+src/
+├── components/          # React components
+├── data/               # Sample sales data
+├── hooks/              # Custom React hooks
+├── providers/          # Context providers
+├── types/              # TypeScript definitions
+├── utils/              # Utility functions
+└── pages/              # Application pages
 ```
 
-**Edit a file directly in GitHub**
+## 🔧 Deployment
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Via Lovable
+Simply open [Lovable](https://lovable.dev/projects/50f96f73-b937-4404-a845-653eb6212ecc) and click on Share → Publish.
 
-**Use GitHub Codespaces**
+### Manual Deployment
+```bash
+npm run build
+# Deploy the dist/ folder to your hosting provider
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
+## 🤝 Development
 
 This project is built with:
+- **Vite** - Fast build tool
+- **TypeScript** - Type safety
+- **React 18** - Modern React features
+- **shadcn/ui** - Beautiful components
+- **Tailwind CSS** - Utility-first styling
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/50f96f73-b937-4404-a845-653eb6212ecc) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Built with ❤️ for modern sales teams who want to interact with their data naturally.

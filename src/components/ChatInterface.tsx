@@ -99,23 +99,38 @@ export const ChatInterface: FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-background to-muted">
-      {/* Header */}
-      <div className="border-b bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-primary">
+    <div className="flex flex-col h-full">
+      {/* Welcome Section - only show when no messages */}
+      {messages.length === 1 && (
+        <div className="flex-shrink-0 p-6 text-center border-b border-border">
+          <div className="max-w-2xl mx-auto">
+            <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-primary mx-auto mb-4">
               <BarChart3 className="h-6 w-6 text-primary-foreground" />
             </div>
-            <div>
-              <h1 className="text-xl font-semibold">Sales AI Assistant</h1>
-              <p className="text-sm text-muted-foreground">
-                Intelligent sales data analysis with voice and file support
-              </p>
+            <h2 className="text-2xl font-bold text-foreground mb-2">Welcome to SalesChatGPT</h2>
+            <p className="text-muted-foreground mb-6">
+              Intelligent sales data analysis with voice and file support. Try these examples:
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {[
+                "What were total sales in Q1 2024?",
+                "Show me sales by region",
+                "Who are our top customers?",
+                "Show me the sales pipeline"
+              ].map((prompt, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleSendMessage(prompt)}
+                  className="p-3 text-sm text-left bg-muted/50 hover:bg-muted rounded-lg transition-colors border border-border/50"
+                  disabled={isLoading}
+                >
+                  {prompt}
+                </button>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Chat Messages */}
       <div className="flex-1 overflow-hidden">
