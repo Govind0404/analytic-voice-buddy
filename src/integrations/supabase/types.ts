@@ -14,10 +14,138 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      customers: {
+        Row: {
+          created_at: string
+          created_date: string
+          customer_name: string
+          id: string
+          industry: string | null
+          region: string
+          segment: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_date?: string
+          customer_name: string
+          id?: string
+          industry?: string | null
+          region: string
+          segment: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_date?: string
+          customer_name?: string
+          id?: string
+          industry?: string | null
+          region?: string
+          segment?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      opportunities: {
+        Row: {
+          amount: number
+          close_date: string
+          created_at: string
+          customer_id: string
+          id: string
+          product: string | null
+          rep_owner: string | null
+          stage: string
+          updated_at: string
+        }
+        Insert: {
+          amount: number
+          close_date: string
+          created_at?: string
+          customer_id: string
+          id?: string
+          product?: string | null
+          rep_owner?: string | null
+          stage: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          close_date?: string
+          created_at?: string
+          customer_id?: string
+          id?: string
+          product?: string | null
+          rep_owner?: string | null
+          stage?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "opportunities_customer_id_fkey"
+            columns: ["customer_id"]
+            isOneToOne: false
+            referencedRelation: "customers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      staging_imports: {
+        Row: {
+          error_message: string | null
+          id: string
+          imported_at: string
+          processed: boolean
+          raw_data: Json
+          source_file: string
+          table_target: string
+        }
+        Insert: {
+          error_message?: string | null
+          id?: string
+          imported_at?: string
+          processed?: boolean
+          raw_data: Json
+          source_file: string
+          table_target: string
+        }
+        Update: {
+          error_message?: string | null
+          id?: string
+          imported_at?: string
+          processed?: boolean
+          raw_data?: Json
+          source_file?: string
+          table_target?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      v_booked_revenue: {
+        Row: {
+          avg_deal_size: number | null
+          deal_count: number | null
+          industry: string | null
+          month: string | null
+          quarter: string | null
+          region: string | null
+          segment: string | null
+          total_revenue: number | null
+        }
+        Relationships: []
+      }
+      v_pipeline: {
+        Row: {
+          deal_count: number | null
+          pipeline_value: number | null
+          region: string | null
+          segment: string | null
+          stage: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
