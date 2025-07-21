@@ -1,177 +1,160 @@
-# SalesChatGPT - Conversational Sales Analytics Dashboard
+# SalesChatGPT - Conversational Business Intelligence Dashboard
 
-A modern, responsive web application that enables natural language interaction with sales data through text, voice, and file uploads. Built with React, TypeScript, and Tailwind CSS.
+A comprehensive analytics dashboard that integrates natural language processing with business intelligence capabilities. Query your sales data through conversational interfaces, supporting both text and voice inputs, with automatic data visualization and SQL query generation.
 
 ## 🚀 Features
 
-### Core Functionality
-- **Natural Language Queries**: Ask questions about sales data in plain English
-- **Voice Input**: Real-time speech-to-text transcription for hands-free interaction
-- **CSV File Upload**: Drag-and-drop or click to upload sales data files
-- **Interactive Analytics**: Display results as charts, tables, and key metrics
-- **Conversation History**: Sidebar with past queries and responses
-- **Dark/Light Theme**: Toggle between themes with system preference support
-- **n8n Integration**: Webhook-based chat functionality with data visualization
+- **🤖 AI-Powered Queries**: Natural language processing for business data analysis
+- **📊 Dynamic Visualizations**: Automatic chart generation (bar, line, pie charts)
+- **🗣️ Voice Interface**: Speech-to-text and text-to-speech capabilities
+- **📁 File Upload**: CSV data import and processing
+- **🔗 n8n Integration**: Webhook-based workflow orchestration
+- **📱 Modern UI**: Responsive design with shadcn/ui components
+- **⚡ Real-time Processing**: Instant query processing and response generation
 
-### UI Components
-- **Three-Panel Layout**: Sidebar, main chat, and metrics panel
-- **Responsive Design**: Mobile-first design that works on all devices
-- **Modern Chat Interface**: Clean, ChatGPT-style conversation bubbles
-- **Real-time Metrics**: Live dashboard with key sales indicators
-- **Smooth Animations**: Polished transitions and micro-interactions
+## 🛠️ Technology Stack
 
-## 🛠️ Technical Stack
+### Frontend
+- **React 18** + **TypeScript** - Modern, type-safe UI development
+- **Vite** - Fast build tooling and development server
+- **Chart.js** + **react-chartjs-2** - Dynamic data visualization
+- **shadcn/ui** - Beautiful, accessible UI components
+- **React Router DOM** - Client-side routing
 
-- **Frontend**: React 18 + TypeScript
-- **Styling**: Tailwind CSS + shadcn/ui components
-- **Charts**: Recharts for data visualization + Chart.js for n8n responses
-- **Voice**: Web Speech API for speech recognition
-- **File Processing**: PapaParse for CSV handling
-- **Theme**: next-themes for dark/light mode
-- **Build Tool**: Vite
-- **Backend Integration**: n8n webhooks for chat functionality
+### Backend & AI
+- **OpenAI GPT-4** - Advanced language model for query processing
+- **LangChain** - LLM orchestration and tool calling
+- **n8n** - Workflow automation and webhook processing
+- **Web Speech API** - Browser-based voice processing
 
-## 🚀 Getting Started
+### Data & Integration
+- **SQL Templates** - Schema-aware query generation
+- **RAG Pipeline** - Retrieval-augmented generation for accurate responses
+- **Webhook Architecture** - Real-time frontend-backend communication
+
+## 📖 Documentation
+
+- **[Technical Write-Up](TECHNICAL_WRITEUP.md)** - Detailed technical architecture and implementation details
+- **[API Documentation](docs/API.md)** - Webhook endpoints and data formats
+- **[Deployment Guide](docs/DEPLOYMENT.md)** - Setup and deployment instructions
+
+## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 16+ or Bun
-- Modern web browser with Speech API support
-- n8n server with webhook endpoint
+- Node.js 18+ 
+- npm or yarn
+- n8n instance with webhook endpoint
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <YOUR_GIT_URL>
-   cd saleschatgpt
+   git clone https://github.com/Govind0404/analytic-voice-buddy.git
+   cd analytic-voice-buddy
    ```
 
 2. **Install dependencies**
    ```bash
    npm install
-   # or
-   bun install
    ```
 
 3. **Configure environment variables**
-   Create a `.env` file in the root directory:
    ```bash
-   VITE_N8N_WEBHOOK_URL=https://adyut.app.n8n.cloud/webhook-test/e37bd202-9bc8-4fbd-b41c-07477d8e0275
+   cp .env.example .env
+   ```
+   Edit `.env` and add your n8n webhook URL:
+   ```
+   VITE_N8N_WEBHOOK_URL=https://your-n8n-instance.com/webhook/your-endpoint
    ```
 
-4. **Start development server**
+4. **Start the development server**
    ```bash
    npm run dev
-   # or
-   bun dev
    ```
 
-5. **Open in browser**
+5. **Open your browser**
    Navigate to `http://localhost:5173`
 
-## 🔧 n8n Integration
+## 🎯 Usage
 
-### Webhook Configuration
-The application integrates with n8n through webhooks for chat functionality:
-
-- **Chat Endpoint**: `POST /webhook/saleschat`
-- **Request Format**: `{ "question": "string" }`
-- **Response Format**: 
-  ```json
-  {
-    "answer": "string",
-    "data": [{"column1": "value1", "column2": "value2"}],
-    "chart_type": "bar|line|pie",
-    "sql": "SELECT * FROM table"
-  }
-  ```
-
-### Features
-- **Text Queries**: Send natural language questions to n8n
-- **Data Visualization**: Automatic chart rendering based on response data
-- **Table Display**: Tabular data presentation with sorting
-- **SQL Preview**: Expandable SQL query display
-- **CSV Upload**: File upload functionality for data processing
-
-### Usage Examples
+### Basic Query
+Type natural language questions like:
 - "What were total sales in Q1 2024?"
-- "Show me sales by region"
-- "Who are our top customers?"
-- "What's the average deal size?"
+- "Show me customer retention trends"
+- "Which products performed best last month?"
 
-## 💬 Usage Examples
-
-### Text Queries
-- "What were total sales in Q1 2024?"
-- "Show me sales by region"
-- "Who are our top customers?"
-- "What's the average deal size?"
-- "Show me the sales pipeline"
-
-### Voice Input
-1. Click the microphone button
-2. Speak your question clearly
-3. Wait for transcription
-4. Click send or say "send"
+### Voice Queries
+Click the microphone button and speak your query for hands-free operation.
 
 ### File Upload
-1. Click the upload button or drag a CSV file
-2. System automatically processes the data
-3. Ask questions about the uploaded data
-4. View results in charts and tables
+Upload CSV files to analyze your own data:
+1. Click the upload button
+2. Select your CSV file
+3. Ask questions about your uploaded data
 
-## 📊 Key Components
+### Testing Webhooks
+Use the testing buttons in the interface to:
+- Test webhook connectivity
+- Debug environment variables
+- Verify GET/POST functionality
 
-- **ChatInterface**: Main conversational UI with voice/file support
-- **QueryProcessor**: Handles natural language queries and generates responses
-- **AnalyticsChart/Table**: Beautiful data visualizations using Recharts
-- **VoiceRecorder**: Real-time speech recognition
-- **FileUploader**: CSV processing with PapaParse
-- **Layout**: Three-panel responsive layout with sidebar and metrics
-- **ThemeProvider**: Dark/light mode support
-- **ChatUI**: n8n webhook integration with data visualization
-- **n8n.ts**: Webhook communication utilities
+## 🔧 Configuration
 
-## 🎨 Architecture
+### Environment Variables
+| Variable | Description | Required |
+|----------|-------------|----------|
+| `VITE_N8N_WEBHOOK_URL` | n8n webhook endpoint URL | Yes |
 
-The application follows a modular component architecture:
+### n8n Workflow Setup
+1. Create a new n8n workflow
+2. Add a Webhook trigger node
+3. Configure the webhook URL
+4. Add LangChain/OpenAI nodes for processing
+5. Set up response formatting
+
+## 📊 Data Flow
 
 ```
-src/
-├── components/          # React components
-│   ├── ChatUI.tsx      # n8n chat interface
-│   └── ui/             # shadcn/ui components
-├── lib/
-│   └── n8n.ts          # n8n webhook utilities
-├── pages/              # Route components
-└── styles/             # CSS and theme files
+User Input (Text/Voice/File)
+    ↓
+Frontend Processing
+    ↓
+n8n Webhook
+    ↓
+LangChain + GPT-4
+    ↓
+SQL Generation & Execution
+    ↓
+Data Visualization
+    ↓
+Response Rendering
 ```
-
-## 🔒 Environment Variables
-
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `VITE_N8N_WEBHOOK_URL` | n8n webhook endpoint | `https://my-n8n-server/webhook/saleschat` |
-
-## 🚀 Deployment
-
-1. **Build for production**
-   ```bash
-   npm run build
-   ```
-
-2. **Deploy the `dist` folder** to your hosting provider
-
-3. **Set environment variables** in your hosting platform
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## 📄 License
+## 📝 License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🆘 Support
+
+- **Issues**: [GitHub Issues](https://github.com/Govind0404/analytic-voice-buddy/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/Govind0404/analytic-voice-buddy/discussions)
+- **Documentation**: [Technical Write-Up](TECHNICAL_WRITEUP.md)
+
+## 🎉 Acknowledgments
+
+- OpenAI for GPT-4 and LangChain integration
+- n8n team for workflow automation platform
+- Chart.js community for data visualization
+- shadcn/ui for beautiful UI components
+
+---
+
+**Built with ❤️ for modern business intelligence**
