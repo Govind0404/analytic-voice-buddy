@@ -119,3 +119,63 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+/* Chat-specific styles */
+@layer components {
+  .chat-container {
+    @apply max-w-4xl mx-auto p-4 h-screen flex flex-col;
+  }
+
+  .chat-box {
+    @apply flex-1 overflow-y-auto mb-4 space-y-4;
+    max-height: calc(100vh - 200px);
+  }
+
+  .message.user {
+    @apply flex justify-end;
+  }
+
+  .message.ai {
+    @apply flex justify-start;
+  }
+
+  .message.user > div {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  .message.ai > div {
+    @apply bg-muted text-foreground;
+  }
+
+  /* Table styles for data results */
+  .chat-table {
+    @apply min-w-full border border-border rounded-lg overflow-hidden;
+  }
+
+  .chat-table thead {
+    @apply bg-muted;
+  }
+
+  .chat-table th {
+    @apply px-4 py-2 text-left font-medium border-b;
+  }
+
+  .chat-table td {
+    @apply px-4 py-2 border-b;
+  }
+
+  .chat-table tbody tr:hover {
+    @apply bg-muted/50;
+  }
+
+  /* SQL code block styles */
+  .sql-code {
+    @apply mt-2 p-3 bg-background border rounded text-xs overflow-x-auto;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  }
+
+  /* Chart container styles */
+  .chart-container {
+    @apply mt-4 p-4 bg-background border rounded-lg;
+  }
+}

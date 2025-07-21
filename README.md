@@ -11,6 +11,7 @@ A modern, responsive web application that enables natural language interaction w
 - **Interactive Analytics**: Display results as charts, tables, and key metrics
 - **Conversation History**: Sidebar with past queries and responses
 - **Dark/Light Theme**: Toggle between themes with system preference support
+- **n8n Integration**: Webhook-based chat functionality with data visualization
 
 ### UI Components
 - **Three-Panel Layout**: Sidebar, main chat, and metrics panel
@@ -23,17 +24,19 @@ A modern, responsive web application that enables natural language interaction w
 
 - **Frontend**: React 18 + TypeScript
 - **Styling**: Tailwind CSS + shadcn/ui components
-- **Charts**: Recharts for data visualization
+- **Charts**: Recharts for data visualization + Chart.js for n8n responses
 - **Voice**: Web Speech API for speech recognition
 - **File Processing**: PapaParse for CSV handling
 - **Theme**: next-themes for dark/light mode
 - **Build Tool**: Vite
+- **Backend Integration**: n8n webhooks for chat functionality
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 - Node.js 16+ or Bun
 - Modern web browser with Speech API support
+- n8n server with webhook endpoint
 
 ### Installation
 
@@ -50,15 +53,51 @@ A modern, responsive web application that enables natural language interaction w
    bun install
    ```
 
-3. **Start development server**
+3. **Configure environment variables**
+   Create a `.env` file in the root directory:
+   ```bash
+   VITE_N8N_WEBHOOK_URL=https://adyut.app.n8n.cloud/webhook-test/e37bd202-9bc8-4fbd-b41c-07477d8e0275
+   ```
+
+4. **Start development server**
    ```bash
    npm run dev
    # or
    bun dev
    ```
 
-4. **Open in browser**
+5. **Open in browser**
    Navigate to `http://localhost:5173`
+
+## 🔧 n8n Integration
+
+### Webhook Configuration
+The application integrates with n8n through webhooks for chat functionality:
+
+- **Chat Endpoint**: `POST /webhook/saleschat`
+- **Request Format**: `{ "question": "string" }`
+- **Response Format**: 
+  ```json
+  {
+    "answer": "string",
+    "data": [{"column1": "value1", "column2": "value2"}],
+    "chart_type": "bar|line|pie",
+    "sql": "SELECT * FROM table"
+  }
+  ```
+
+### Features
+- **Text Queries**: Send natural language questions to n8n
+- **Data Visualization**: Automatic chart rendering based on response data
+- **Table Display**: Tabular data presentation with sorting
+- **SQL Preview**: Expandable SQL query display
+- **CSV Upload**: File upload functionality for data processing
+
+### Usage Examples
+- "What were total sales in Q1 2024?"
+- "Show me sales by region"
+- "Who are our top customers?"
+- "What's the average deal size?"
 
 ## 💬 Usage Examples
 
@@ -90,6 +129,8 @@ A modern, responsive web application that enables natural language interaction w
 - **FileUploader**: CSV processing with PapaParse
 - **Layout**: Three-panel responsive layout with sidebar and metrics
 - **ThemeProvider**: Dark/light mode support
+- **ChatUI**: n8n webhook integration with data visualization
+- **n8n.ts**: Webhook communication utilities
 
 ## 🎨 Architecture
 
@@ -98,32 +139,39 @@ The application follows a modular component architecture:
 ```
 src/
 ├── components/          # React components
-├── data/               # Sample sales data
-├── hooks/              # Custom React hooks
-├── providers/          # Context providers
-├── types/              # TypeScript definitions
-├── utils/              # Utility functions
-└── pages/              # Application pages
+│   ├── ChatUI.tsx      # n8n chat interface
+│   └── ui/             # shadcn/ui components
+├── lib/
+│   └── n8n.ts          # n8n webhook utilities
+├── pages/              # Route components
+└── styles/             # CSS and theme files
 ```
 
-## 🔧 Deployment
+## 🔒 Environment Variables
 
-### Via Lovable
-Simply open [Lovable](https://lovable.dev/projects/50f96f73-b937-4404-a845-653eb6212ecc) and click on Share → Publish.
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `VITE_N8N_WEBHOOK_URL` | n8n webhook endpoint | `https://my-n8n-server/webhook/saleschat` |
 
-### Manual Deployment
-```bash
-npm run build
-# Deploy the dist/ folder to your hosting provider
-```
+## 🚀 Deployment
 
-## 🤝 Development
+1. **Build for production**
+   ```bash
+   npm run build
+   ```
 
-This project is built with:
-- **Vite** - Fast build tool
-- **TypeScript** - Type safety
-- **React 18** - Modern React features
-- **shadcn/ui** - Beautiful components
-- **Tailwind CSS** - Utility-first styling
+2. **Deploy the `dist` folder** to your hosting provider
 
-Built with ❤️ for modern sales teams who want to interact with their data naturally.
+3. **Set environment variables** in your hosting platform
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License.

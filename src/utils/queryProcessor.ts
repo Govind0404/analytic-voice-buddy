@@ -1,4 +1,5 @@
 import { opportunities, customers, getTotalSalesByQuarter, getSalesByRegion, getOpportunitiesByDateRange } from '../data/sampleData';
+import { triggerWebhook, triggerWebhookGET, triggerWebhookPOST, N8nResponse } from '../lib/n8n';
 
 export interface QueryResult {
   type: 'text' | 'chart' | 'table';
@@ -16,6 +17,66 @@ export interface ChatMessage {
 }
 
 export const processQuery = async (query: string): Promise<{ message: string; results: QueryResult[] }> => {
+  // First, try to use the n8n webhook with different methods
+  try {
+    console.log('🔄 Attempting n8n webhook integration...');
+    
+    // Try POST request first
+    let n8nResponse: N8nResponse;
+    
+    try {
+      n8nResponse = await triggerWebhook({
+        method: 'POST',
+        question: query,
+        action: 'analyze',
+      });
+    } catch (postError) {
+      console.log('POST failed, trying GET...', postError);
+      
+      // Try GET request as fallback
+      n8nResponse = await triggerWebhook({
+        method: 'GET',
+        params: {
+          question: query,
+          action: 'analyze',
+        },
+      });
+    }
+    
+    if (n8nResponse.answer) {
+      const results: QueryResult[] = [];
+      
+      // Add data table if present
+      if (n8nResponse.data && n8nResponse.data.length > 0) {
+        results.push({
+          type: 'table',
+          title: 'Query Results',
+          data: n8nResponse.data
+        });
+      }
+      
+      // Add chart if specified
+      if (n8nResponse.chart_type && n8nResponse.data) {
+        results.push({
+          type: 'chart',
+          title: 'Data Visualization',
+          data: {
+            chartType: n8nResponse.chart_type,
+            data: n8nResponse.data
+          }
+        });
+      }
+      
+      return {
+        message: n8nResponse.answer,
+        results
+      };
+    }
+  } catch (error) {
+    console.log('n8n webhook failed, falling back to sample data:', error);
+  }
+  
+  // Fallback to sample data processing
   const lowerQuery = query.toLowerCase();
   
   // Q1 2024 sales query

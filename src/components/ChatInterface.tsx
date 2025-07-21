@@ -3,12 +3,13 @@ import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { ScrollArea } from './ui/scroll-area';
-import { Send, Bot, BarChart3 } from 'lucide-react';
+import { Send, Bot, BarChart3, TestTube, Download, Upload, Bug } from 'lucide-react';
 import { ChatMessage } from './ChatMessage';
 import { VoiceRecorder } from './VoiceRecorder';
 import { FileUploader } from './FileUploader';
 import { ChatMessage as ChatMessageType, processQuery } from '../utils/queryProcessor';
 import { useToast } from '../hooks/use-toast';
+import { testWebhook, triggerWebhookGET, triggerWebhookPOST, debugEnvironment } from '../lib/n8n';
 
 export const ChatInterface: FC = () => {
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -98,6 +99,104 @@ export const ChatInterface: FC = () => {
     }
   };
 
+  const handleTestWebhook = async () => {
+    try {
+      const result = await testWebhook();
+      console.log('🧪 Webhook test result:', result);
+      
+      if (result.success) {
+        toast({
+          title: "✅ Webhook Test Successful",
+          description: result.message,
+        });
+      } else {
+        toast({
+          title: "❌ Webhook Test Failed",
+          description: result.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error('Test webhook error:', error);
+      toast({
+        title: "❌ Webhook Test Error",
+        description: "Failed to test webhook connection",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleTestGET = async () => {
+    try {
+      const result = await triggerWebhookGET({
+        question: 'What were total sales in Q1 2024?',
+        action: 'test_get'
+      });
+      console.log('📤 GET test result:', result);
+      toast({
+        title: "✅ GET Request Successful",
+        description: "Webhook GET request worked!",
+      });
+    } catch (error) {
+      console.error('GET test error:', error);
+      toast({
+        title: "❌ GET Request Failed",
+        description: error instanceof Error ? error.message : "Unknown error",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleTestPOST = async () => {
+    try {
+      const result = await triggerWebhookPOST({
+        question: 'What were total sales in Q1 2024?',
+        action: 'test_post'
+      });
+      console.log('📤 POST test result:', result);
+      toast({
+        title: "✅ POST Request Successful",
+        description: "Webhook POST request worked!",
+      });
+    } catch (error) {
+      console.error('POST test error:', error);
+      toast({
+        title: "❌ POST Request Failed",
+        description: error instanceof Error ? error.message : "Unknown error",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleSimpleTest = async () => {
+    try {
+      const result = await triggerWebhookPOST({
+        question: 'Hello',
+        action: 'simple_test'
+      });
+      console.log('📤 Simple test result:', result);
+      toast({
+        title: "✅ Simple Test Successful",
+        description: "Basic webhook test worked!",
+      });
+    } catch (error) {
+      console.error('Simple test error:', error);
+      toast({
+        title: "❌ Simple Test Failed",
+        description: error instanceof Error ? error.message : "Unknown error",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDebugEnvironment = () => {
+    debugEnvironment();
+    toast({
+      title: "🔍 Environment Debug",
+      description: "Check browser console for environment variable details",
+    });
+  };
+
   return (
     <div className="flex flex-col h-full">
       {/* Welcome Section - only show when no messages */}
@@ -111,7 +210,7 @@ export const ChatInterface: FC = () => {
             <p className="text-muted-foreground mb-6">
               Intelligent sales data analysis with voice and file support. Try these examples:
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
               {[
                 "What were total sales in Q1 2024?",
                 "Show me sales by region",
@@ -127,6 +226,48 @@ export const ChatInterface: FC = () => {
                   {prompt}
                 </button>
               ))}
+            </div>
+            <div className="flex flex-wrap gap-2 justify-center">
+              <Button
+                onClick={handleDebugEnvironment}
+                variant="outline"
+                size="sm"
+              >
+                <Bug className="h-4 w-4 mr-2" />
+                Debug Env
+              </Button>
+              <Button
+                onClick={handleSimpleTest}
+                variant="outline"
+                size="sm"
+              >
+                <TestTube className="h-4 w-4 mr-2" />
+                Simple Test
+              </Button>
+              <Button
+                onClick={handleTestWebhook}
+                variant="outline"
+                size="sm"
+              >
+                <TestTube className="h-4 w-4 mr-2" />
+                Test Webhook
+              </Button>
+              <Button
+                onClick={handleTestGET}
+                variant="outline"
+                size="sm"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Test GET
+              </Button>
+              <Button
+                onClick={handleTestPOST}
+                variant="outline"
+                size="sm"
+              >
+                <Upload className="h-4 w-4 mr-2" />
+                Test POST
+              </Button>
             </div>
           </div>
         </div>
